@@ -4,6 +4,7 @@
 int main()
 {
   char c;
+  size_t linecount = 0;
   FILE *f_from, *f_to;
 
   f_from = fopen("myfile.txt", "r");
@@ -20,9 +21,12 @@ int main()
       exit(1);
     }
 
-    while ((c = getc(f_from)) != EOF) {
-    putc(c, f_to);
-}
+  
+   while((c = fgetc(f_from)) != EOF)
+    {
+  
+        printf("%c ", c);
+    }
 
   fclose(f_to);
   fclose(f_from);

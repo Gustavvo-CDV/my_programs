@@ -46,7 +46,7 @@ int main()
 {
 	char arr[100];
 	int n;
-	n = 5;
+	n = 1;
 
 	// Calling for the function
 	func(arr, n);
