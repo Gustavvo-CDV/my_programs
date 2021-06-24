@@ -8,7 +8,6 @@
 int main(int argc, char *argv[])
 {
     int  i, numberArray[10];
-    char line;
 
     FILE *open_file;
 
@@ -31,11 +30,14 @@ int main(int argc, char *argv[])
         fscanf(open_file, "%d", &numberArray[i]);
     }
 
+    int counter = 1;
+
     for (i = 0; i < 10; i++)
     {
-        printf("Number is: %d\n\n", numberArray[i] * 3);
+        printf("%i. %i * 3= %d\n", counter,numberArray[i], numberArray[i] * 3);
+        counter ++;
     }
 
-  fclose(open_file);
-  exit(0);
- }
+    fclose(open_file);
+    exit(0);
+    }
