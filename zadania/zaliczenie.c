@@ -21,18 +21,18 @@ void child_process(char *in_file_name, char *out_file_name)
         exit(1);
     }
 
-    ssize_t buf_read = 0;
-    char buf[BUF_SIZE];
-    int total_bytes = 0;
+    ssize_t single_read_size = 0; //ilośc bytow oczytana przy jednym odczycie  
+    char buffer[BUF_SIZE]; // bufor o rozmiarze BUF_SIZE 
+    int total_bytes = 0; //
 
-    while((buf_read = read(f_from, &buf, BUF_SIZE)) > 0)
+    while((single_read_size = read(f_from, &buffer, BUF_SIZE)) > 0)
     {
-        total_bytes += (int)buf_read;
+        total_bytes += (int)single_read_size;
     }
     
-    char out_buff[50];
+    char out_buff[50]; // dzieki niej moge zformatowac tekst który trafia do pliku wynikowego
     snprintf(out_buff, sizeof out_buff, "Plik %s ma wielkosc: %d bajtow\n", in_file_name, total_bytes);
-    fputs(out_buff, f_to);
+    fputs(out_buff, f_to); //wczesniej sformatowany tekst, zapisuje do pliku x
     
     close(f_from);
     fclose(f_to);
@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    if (fork()== 0)
+    if (fork()== 0) // stworzenie procesu potomnego, sprawdzam który to proces (glowny czy potomny), jesli jest 0 jest procesem (dziecka) kazda inna to proces głowny (rodzica)
         child_process(argv[2], argv[1]);
     else
     {
